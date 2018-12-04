@@ -1,0 +1,151 @@
+public interface Movable {
+
+	void moveUp();
+	void moveDown();
+	void moveLeft();
+	void moveRight();
+}
+
+
+MovablePoint.java
+
+
+public class MovablePoint implements Movable{
+	
+	 int x;
+	 int y;
+	 int xSpeed;
+	 int ySpeed;
+	 
+	 public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+
+	        this.x = x;
+
+	        this.y = y;
+
+	        this.xSpeed = xSpeed;
+
+	        this.ySpeed = ySpeed;
+
+	    }
+	
+	@Override
+	public void moveUp()
+	{
+		this.y -= ySpeed;
+	}
+	
+	@Override
+	public void moveDown()
+	{
+		this.y += ySpeed;
+	}
+	
+	@Override
+	public void moveLeft()
+	{
+		this.x -= xSpeed;
+	}
+	
+	@Override
+	public void moveRight()
+	{
+		this.x += ySpeed;
+	}
+	
+	public int getxSpeed()
+	{
+		return this.xSpeed;
+	}
+	public int getySpeed()
+	{
+		return this.ySpeed;
+	}
+		
+	
+}
+	
+  
+  MovableRectangle.java
+  
+  public class MovableRectangle implements Movable{
+
+	private MovablePoint topLeft;
+	private MovablePoint bottomRight;
+	
+	public MovableRectangle(int x1, int y1, int x2, int y2, int xSpeed, int ySpeed)
+	{
+		
+		this.topLeft = new MovablePoint(x1,y1,xSpeed,ySpeed);
+		this.bottomRight = new MovablePoint(x2,y2,xSpeed,ySpeed);
+	
+	}
+	
+	
+	public  String toString()
+	{
+		
+		 System.out.println( "Movable Rectangle{x1 = " + this.topLeft.x + ",y1 = " + this.topLeft.y +
+
+	                ", x1Speed = " + this.topLeft.xSpeed + ", y1Speed = " + this.topLeft.ySpeed + "x2 = " + this.bottomRight.x + ",y2 = " + this.bottomRight.y +
+
+	    	                ", x2Speed = " + this.bottomRight.xSpeed + ", y2Speed = " + this.bottomRight.ySpeed + "}");
+		 return "NULL";
+	}
+	
+
+	public void CheckSpeed()
+	{
+		if ((this.topLeft.xSpeed == this.bottomRight.xSpeed) && (this.topLeft.ySpeed == this.bottomRight.ySpeed))
+		System.out.println("Their speed is equal");
+		else
+			System.out.println("Something wrong there");
+	}
+	
+	@Override
+	public void moveUp()
+	{
+		this.topLeft.y -= this.topLeft.ySpeed;
+		this.bottomRight.y -=this.bottomRight.ySpeed;
+	}
+	
+	
+	@Override
+	public void moveDown()
+	{
+		this.topLeft.y += this.topLeft.ySpeed;
+		this.bottomRight.y +=this.bottomRight.ySpeed;
+	}
+	
+	@Override
+	public void moveLeft()
+	{
+		this.topLeft.x -= this.topLeft.xSpeed;
+		this.bottomRight.x -=this.bottomRight.xSpeed;
+	}
+	
+	@Override
+	public void moveRight()
+	{
+		this.topLeft.x += this.topLeft.xSpeed;
+		this.bottomRight.x +=this.bottomRight.xSpeed;
+	}
+	
+	
+}
+
+
+Main.java
+
+public class Main {
+
+	
+	public static void main(String[] args)
+	{
+		
+		MovableRectangle Rectangle = new MovableRectangle(10,10,20,20,5,5);
+		Rectangle.toString();
+		Rectangle.CheckSpeed();
+		
+	}
+}
